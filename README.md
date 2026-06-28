@@ -1,59 +1,102 @@
-# LlanquihueTourApp
+LlanquihueTourApp
+Desarrollo Orientado a Objetos I
 
-## Descripción
+Proyecto desarrollado para la asignatura Desarrollo Orientado a Objetos I, utilizando Java e IntelliJ IDEA.
 
-Aplicación de consola desarrollada en Java para la agencia de turismo Llanquihue Tour.  
-El sistema permite cargar información de guías, operadores y proveedores desde un archivo CSV, almacenar los datos en una colección dinámica y realizar búsquedas simples por consola.
+Descripción
 
-## Paquetes utilizados
+LlanquihueTourApp es una aplicación de consola que simula parte del sistema de gestión de la agencia de turismo Llanquihue Tour.
 
-- model: contiene las clases del modelo de datos.
-- util: contiene la clase encargada de leer archivos externos.
-- service: contiene la lógica de búsqueda y listado.
-- app: contiene la clase principal Main.
+Durante el desarrollo del proyecto se han incorporado conceptos fundamentales de Programación Orientada a Objetos, como encapsulamiento, organización modular mediante paquetes, lectura de datos desde archivos y, posteriormente, la implementación de herencia simple para representar los distintos tipos de servicios turísticos ofrecidos por la agencia.
 
-## Clases implementadas
+Objetivos
+Organizar el proyecto utilizando paquetes.
+Aplicar encapsulamiento mediante atributos privados.
+Implementar constructores, getters, setters y el método toString().
+Modelar una jerarquía de clases utilizando herencia.
+Reutilizar código mediante una superclase.
+Mostrar información por consola utilizando objetos creados desde el programa.
+Estructura del proyecto
+src/
+│
+├── model/
+│   ├── ServicioTuristico.java
+│   ├── RutaGastronomica.java
+│   ├── PaseoLacustre.java
+│   └── ExcursionCultural.java
+│
+├── data/
+│   └── GestorServicios.java
+│
+└── ui/
+    └── Main.java
+Clases implementadas
+ServicioTuristico
 
-- Persona: clase abstracta base.
-- Guia: representa a un guía turístico.
-- Operador: representa a un operador local.
-- Proveedor: representa a un proveedor de servicios.
-- ArchivoUtil: carga datos desde personas.csv.
-- PersonaService: permite listar y buscar personas.
-- Main: ejecuta el sistema.
+Clase base (superclase) que representa un servicio turístico.
 
-## Archivo de entrada
+Atributos:
 
-El archivo se encuentra en:
+nombre
+duracionHoras
 
-resources/personas.csv
+Incluye:
 
-Formato:
+Constructor
+Getters y Setters
+Método toString()
+RutaGastronomica
 
-TIPO;RUT;NOMBRE;CORREO;DETALLE
+Hereda de ServicioTuristico.
 
-Ejemplo:
+Atributo adicional:
 
-GUIA;12345678-9;Camila Soto;camila@correo.cl;Rutas culturales
+numeroDeParadas
 
-## Funcionalidades
+Sobrescribe el método toString() para mostrar toda la información del servicio.
 
-- Organización modular por paquetes.
-- Uso de atributos privados.
-- Constructores, getters, setters y toString().
-- Herencia mediante la clase Persona.
-- Uso de ArrayList<Persona>.
-- Lectura de archivo CSV.
-- Validación de registros.
-- Manejo de errores con try-catch.
-- Listado de registros por consola.
-- Búsqueda por RUT.
-- Búsqueda por nombre.
+PaseoLacustre
 
-## Ejecución
+Hereda de ServicioTuristico.
 
-Abrir el proyecto en IntelliJ IDEA y ejecutar la clase:
+Atributo adicional:
 
-app.Main
+tipoEmbarcacion
 
-Verificar que el archivo personas.csv esté ubicado en la carpeta resources.
+También sobrescribe el método toString().
+
+ExcursionCultural
+
+Hereda de ServicioTuristico.
+
+Atributo adicional:
+
+lugarHistorico
+
+Sobrescribe el método toString().
+
+GestorServicios
+
+Clase encargada de crear objetos de prueba de cada tipo de servicio turístico.
+
+Se crean:
+
+2 Rutas Gastronómicas.
+2 Paseos Lacustres.
+2 Excursiones Culturales.
+Main
+
+Clase principal del proyecto.
+
+Su función es:
+
+Crear una instancia de GestorServicios.
+Mostrar todos los servicios turísticos utilizando el método toString() de cada objeto.
+Conceptos aplicados
+Programación Orientada a Objetos.
+Encapsulamiento.
+Herencia simple.
+Sobrescritura de métodos (@Override).
+Uso de super().
+Organización modular mediante paquetes.
+Reutilización de código.
