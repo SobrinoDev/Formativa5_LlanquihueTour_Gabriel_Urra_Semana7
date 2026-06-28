@@ -1,21 +1,21 @@
 LlanquihueTourApp
 Desarrollo Orientado a Objetos I
+Descripción del proyecto
 
-Proyecto desarrollado para la asignatura Desarrollo Orientado a Objetos I, utilizando Java e IntelliJ IDEA.
+LlanquihueTourApp es una aplicación de consola desarrollada en Java como parte de la asignatura Desarrollo Orientado a Objetos I. El proyecto tiene como finalidad representar un sistema básico para la gestión de servicios turísticos de la agencia Llanquihue Tour, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
 
-Descripción
-
-LlanquihueTourApp es una aplicación de consola que simula parte del sistema de gestión de la agencia de turismo Llanquihue Tour.
-
-Durante el desarrollo del proyecto se han incorporado conceptos fundamentales de Programación Orientada a Objetos, como encapsulamiento, organización modular mediante paquetes, lectura de datos desde archivos y, posteriormente, la implementación de herencia simple para representar los distintos tipos de servicios turísticos ofrecidos por la agencia.
+Durante el desarrollo del proyecto se implementaron conceptos como encapsulamiento, organización modular mediante paquetes, reutilización de código a través de la herencia y sobrescritura de métodos, permitiendo modelar de forma estructurada los distintos tipos de servicios turísticos ofrecidos por la agencia.
 
 Objetivos
-Organizar el proyecto utilizando paquetes.
-Aplicar encapsulamiento mediante atributos privados.
-Implementar constructores, getters, setters y el método toString().
-Modelar una jerarquía de clases utilizando herencia.
-Reutilizar código mediante una superclase.
-Mostrar información por consola utilizando objetos creados desde el programa.
+
+El desarrollo de este proyecto tiene como objetivos:
+
+Organizar el código utilizando una estructura modular basada en paquetes.
+Aplicar el principio de encapsulamiento mediante atributos privados.
+Implementar constructores, métodos de acceso (getters y setters) y el método toString().
+Diseñar una jerarquía de clases utilizando herencia simple.
+Favorecer la reutilización de código mediante una superclase.
+Mostrar la información de los servicios turísticos a través de una aplicación de consola.
 Estructura del proyecto
 src/
 │
@@ -30,10 +30,10 @@ src/
 │
 └── ui/
     └── Main.java
-Clases implementadas
+Descripción de las clases
 ServicioTuristico
 
-Clase base (superclase) que representa un servicio turístico.
+Corresponde a la superclase del sistema y representa la información común de cualquier servicio turístico ofrecido por la agencia.
 
 Atributos:
 
@@ -42,61 +42,65 @@ duracionHoras
 
 Incluye:
 
-Constructor
-Getters y Setters
-Método toString()
+Constructor.
+Métodos getters y setters.
+Sobrescritura del método toString() para representar la información del objeto.
 RutaGastronomica
 
-Hereda de ServicioTuristico.
+Clase que hereda de ServicioTuristico y representa las rutas gastronómicas ofrecidas por la agencia.
 
 Atributo adicional:
 
 numeroDeParadas
 
-Sobrescribe el método toString() para mostrar toda la información del servicio.
+Sobrescribe el método toString() para incluir la información específica de este tipo de servicio.
 
 PaseoLacustre
 
-Hereda de ServicioTuristico.
+Clase derivada de ServicioTuristico que representa los paseos lacustres.
 
 Atributo adicional:
 
 tipoEmbarcacion
 
-También sobrescribe el método toString().
+Implementa su propia versión del método toString() para mostrar las características particulares del servicio.
 
 ExcursionCultural
 
-Hereda de ServicioTuristico.
+Clase derivada de ServicioTuristico destinada a representar excursiones culturales.
 
 Atributo adicional:
 
 lugarHistorico
 
-Sobrescribe el método toString().
+Sobrescribe el método toString() para complementar la información heredada con los datos propios de la excursión.
 
 GestorServicios
 
-Clase encargada de crear objetos de prueba de cada tipo de servicio turístico.
+Clase responsable de crear las instancias de prueba utilizadas por la aplicación.
 
-Se crean:
+Actualmente genera:
 
-2 Rutas Gastronómicas.
-2 Paseos Lacustres.
-2 Excursiones Culturales.
+Dos objetos de tipo RutaGastronomica.
+Dos objetos de tipo PaseoLacustre.
+Dos objetos de tipo ExcursionCultural.
+
+Su propósito es centralizar la creación de objetos y facilitar las pruebas del sistema.
+
 Main
 
-Clase principal del proyecto.
+Clase principal de la aplicación.
 
-Su función es:
+Desde esta clase se inicia la ejecución del programa, se crea una instancia de GestorServicios y se muestran en consola todos los servicios turísticos registrados mediante la utilización del método toString() de cada objeto.
 
-Crear una instancia de GestorServicios.
-Mostrar todos los servicios turísticos utilizando el método toString() de cada objeto.
 Conceptos aplicados
-Programación Orientada a Objetos.
+
+Durante el desarrollo del proyecto se aplicaron los siguientes conceptos de Programación Orientada a Objetos:
+
 Encapsulamiento.
 Herencia simple.
-Sobrescritura de métodos (@Override).
-Uso de super().
-Organización modular mediante paquetes.
 Reutilización de código.
+Sobrescritura de métodos (@Override).
+Uso del constructor de la superclase mediante super().
+Organización modular del proyecto mediante paquetes.
+Separación de responsabilidades entre las distintas clases.
