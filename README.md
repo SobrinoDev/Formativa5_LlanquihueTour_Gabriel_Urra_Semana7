@@ -29,16 +29,22 @@ El desarrollo de este proyecto tiene como objetivos:
 src/
 │
 ├── model/
-│   ├── ServicioTuristico.java
-│   ├── RutaGastronomica.java
-│   ├── PaseoLacustre.java
-│   └── ExcursionCultural.java
-│
+│ ├── Persona.java
+│ ├── Guia.java
+│ ├── Operador.java
+│ ├── Proveedor.java
+│ ├── ServicioTuristico.java
+│ ├── RutaGastronomica.java
+│ ├── PaseoLacustre.java
+│ └── ExcursionCultural.java
 ├── data/
-│   └── GestorServicios.java
-│
+│ └── GestorServicios.java
+├── service/
+│ └── PersonaService.java
+├── util/
+│ └── ArchivoUtil.java
 └── ui/
-    └── Main.java
+└── Main.java
 ```
 
 ---
