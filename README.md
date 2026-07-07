@@ -1,59 +1,165 @@
 # LlanquihueTourApp
 
-## Descripción
+## Desarrollo Orientado a Objetos I
 
-Aplicación de consola desarrollada en Java para la agencia de turismo Llanquihue Tour.  
-El sistema permite cargar información de guías, operadores y proveedores desde un archivo CSV, almacenar los datos en una colección dinámica y realizar búsquedas simples por consola.
+### Descripción del proyecto
 
-## Paquetes utilizados
+**LlanquihueTourApp** es una aplicación de consola desarrollada en **Java** como parte de la asignatura **Desarrollo Orientado a Objetos I**. El proyecto tiene como finalidad representar un sistema básico para la gestión de servicios turísticos de la agencia **Llanquihue Tour**, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
 
-- model: contiene las clases del modelo de datos.
-- util: contiene la clase encargada de leer archivos externos.
-- service: contiene la lógica de búsqueda y listado.
-- app: contiene la clase principal Main.
+Durante el desarrollo del proyecto se implementaron conceptos como encapsulamiento, organización modular mediante paquetes, reutilización de código a través de la herencia y sobrescritura de métodos, permitiendo modelar de forma estructurada los distintos tipos de servicios turísticos ofrecidos por la agencia.
 
-## Clases implementadas
+---
 
-- Persona: clase abstracta base.
-- Guia: representa a un guía turístico.
-- Operador: representa a un operador local.
-- Proveedor: representa a un proveedor de servicios.
-- ArchivoUtil: carga datos desde personas.csv.
-- PersonaService: permite listar y buscar personas.
-- Main: ejecuta el sistema.
+## Objetivos
 
-## Archivo de entrada
+El desarrollo de este proyecto tiene como objetivos:
 
-El archivo se encuentra en:
+* Organizar el código utilizando una estructura modular basada en paquetes.
+* Aplicar el principio de encapsulamiento mediante atributos privados.
+* Implementar constructores, métodos de acceso (getters y setters) y el método `toString()`.
+* Diseñar una jerarquía de clases utilizando herencia simple.
+* Favorecer la reutilización de código mediante una superclase.
+* Mostrar la información de los servicios turísticos a través de una aplicación de consola.
 
-resources/personas.csv
+---
 
-Formato:
+## Estructura del proyecto
 
-TIPO;RUT;NOMBRE;CORREO;DETALLE
+```text
+src/
+│
+├── model/
+│ ├── Persona.java
+│ ├── Guia.java
+│ ├── Operador.java
+│ ├── Proveedor.java
+│ ├── ServicioTuristico.java
+│ ├── RutaGastronomica.java
+│ ├── PaseoLacustre.java
+│ └── ExcursionCultural.java
+├── data/
+│ └── GestorServicios.java
+├── service/
+│ └── PersonaService.java
+├── util/
+│ └── ArchivoUtil.java
+└── ui/
+└── Main.java
+```
 
-Ejemplo:
+---
 
-GUIA;12345678-9;Camila Soto;camila@correo.cl;Rutas culturales
+## Descripción de las clases
 
-## Funcionalidades
+### ServicioTuristico
 
-- Organización modular por paquetes.
-- Uso de atributos privados.
-- Constructores, getters, setters y toString().
-- Herencia mediante la clase Persona.
-- Uso de ArrayList<Persona>.
-- Lectura de archivo CSV.
-- Validación de registros.
-- Manejo de errores con try-catch.
-- Listado de registros por consola.
-- Búsqueda por RUT.
-- Búsqueda por nombre.
+Corresponde a la superclase del sistema y representa la información común de cualquier servicio turístico ofrecido por la agencia.
 
-## Ejecución
+**Atributos:**
 
-Abrir el proyecto en IntelliJ IDEA y ejecutar la clase:
+* `nombre`
+* `duracionHoras`
 
-app.Main
+**Incluye:**
 
-Verificar que el archivo personas.csv esté ubicado en la carpeta resources.
+* Constructor.
+* Métodos getters y setters.
+* Sobrescritura del método `toString()` para representar la información del objeto.
+
+---
+
+### RutaGastronomica
+
+Clase que hereda de `ServicioTuristico` y representa las rutas gastronómicas ofrecidas por la agencia.
+
+**Atributo adicional:**
+
+* `numeroDeParadas`
+
+Sobrescribe el método `toString()` para incluir la información específica de este tipo de servicio.
+
+---
+
+### PaseoLacustre
+
+Clase derivada de `ServicioTuristico` que representa los paseos lacustres.
+
+**Atributo adicional:**
+
+* `tipoEmbarcacion`
+
+Implementa su propia versión del método `toString()` para mostrar las características particulares del servicio.
+
+---
+
+### ExcursionCultural
+
+Clase derivada de `ServicioTuristico` destinada a representar excursiones culturales.
+
+**Atributo adicional:**
+
+* `lugarHistorico`
+
+Sobrescribe el método `toString()` para complementar la información heredada con los datos propios de la excursión.
+
+---
+
+### GestorServicios
+
+Clase responsable de crear las instancias de prueba utilizadas por la aplicación.
+
+Actualmente genera:
+
+* Dos objetos de tipo `RutaGastronomica`.
+* Dos objetos de tipo `PaseoLacustre`.
+* Dos objetos de tipo `ExcursionCultural`.
+
+Su propósito es centralizar la creación de objetos y facilitar las pruebas del sistema.
+
+---
+
+### Main
+
+Clase principal de la aplicación.
+
+Desde esta clase se inicia la ejecución del programa, se crea una instancia de `GestorServicios` y se muestran en consola todos los servicios turísticos registrados mediante la utilización del método `toString()` de cada objeto.
+
+---
+
+## Conceptos aplicados
+
+Durante el desarrollo del proyecto se aplicaron los siguientes conceptos de Programación Orientada a Objetos:
+
+* Encapsulamiento.
+* Herencia simple.
+* Reutilización de código.
+* Sobrescritura de métodos (`@Override`).
+* Uso del constructor de la superclase mediante `super()`.
+* Organización modular del proyecto mediante paquetes.
+* Separación de responsabilidades entre las distintas clases.
+
+---
+
+## Tecnologías utilizadas
+
+* Java
+* IntelliJ IDEA
+* Git
+* GitHub
+
+---
+
+## Instrucciones de ejecución
+
+1. Clonar el repositorio en el equipo local.
+2. Abrir el proyecto utilizando IntelliJ IDEA.
+3. Ejecutar la clase `Main` ubicada en el paquete `ui`.
+4. El programa mostrará por consola la información correspondiente a los servicios turísticos creados como datos de prueba.
+
+---
+
+## Autor
+
+**Gabriel Urra**
+
+Proyecto desarrollado para la asignatura **Desarrollo Orientado a Objetos I**.
