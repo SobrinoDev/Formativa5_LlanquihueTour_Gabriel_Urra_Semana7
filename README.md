@@ -1,165 +1,186 @@
-# LlanquihueTourApp
+LlanquihueTourApp
+Desarrollo Orientado a Objetos I
+Descripción del proyecto
 
-## Desarrollo Orientado a Objetos I
+LlanquihueTourApp es una aplicación de consola desarrollada en Java para la asignatura Desarrollo Orientado a Objetos I. El proyecto tiene como finalidad representar un sistema básico para la gestión de la agencia de turismo Llanquihue Tour, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
 
-### Descripción del proyecto
+Durante las distintas etapas del desarrollo se han implementado funcionalidades para la administración de personas vinculadas a la agencia (guías, operadores y proveedores) y la representación de los servicios turísticos mediante una jerarquía de clases. Además, se incorporó el uso de polimorfismo y colecciones genéricas, permitiendo gestionar diferentes tipos de servicios turísticos desde una única colección y recorrerlos dinámicamente.
 
-**LlanquihueTourApp** es una aplicación de consola desarrollada en **Java** como parte de la asignatura **Desarrollo Orientado a Objetos I**. El proyecto tiene como finalidad representar un sistema básico para la gestión de servicios turísticos de la agencia **Llanquihue Tour**, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
+Objetivos
 
-Durante el desarrollo del proyecto se implementaron conceptos como encapsulamiento, organización modular mediante paquetes, reutilización de código a través de la herencia y sobrescritura de métodos, permitiendo modelar de forma estructurada los distintos tipos de servicios turísticos ofrecidos por la agencia.
+El proyecto tiene como objetivos:
 
----
+Organizar el código utilizando una estructura modular basada en paquetes.
+Aplicar el principio de encapsulamiento mediante atributos privados.
+Implementar constructores, métodos getters, setters y el método toString().
+Modelar relaciones de herencia entre clases.
+Aplicar polimorfismo mediante referencias a la superclase.
+Gestionar objetos utilizando colecciones genéricas (List y ArrayList).
+Reutilizar código mediante superclases.
+Leer y validar información desde archivos externos.
+Mostrar información mediante una aplicación de consola.
+Estructura del proyecto
 
-## Objetivos
-
-El desarrollo de este proyecto tiene como objetivos:
-
-* Organizar el código utilizando una estructura modular basada en paquetes.
-* Aplicar el principio de encapsulamiento mediante atributos privados.
-* Implementar constructores, métodos de acceso (getters y setters) y el método `toString()`.
-* Diseñar una jerarquía de clases utilizando herencia simple.
-* Favorecer la reutilización de código mediante una superclase.
-* Mostrar la información de los servicios turísticos a través de una aplicación de consola.
-
----
-
-## Estructura del proyecto
-
-```text
 src/
 │
 ├── model/
-│ ├── Persona.java
-│ ├── Guia.java
-│ ├── Operador.java
-│ ├── Proveedor.java
-│ ├── ServicioTuristico.java
-│ ├── RutaGastronomica.java
-│ ├── PaseoLacustre.java
-│ └── ExcursionCultural.java
+│   
+├── Persona.java
+│   ├── Guia.java
+│   ├── Operador.java
+│   ├── Proveedor.java
+│   ├── ServicioTuristico.java
+│   ├── RutaGastronomica.java
+│   ├── PaseoLacustre.java
+│   └── ExcursionCultural.java
+│
 ├── data/
-│ └── GestorServicios.java
+│   └── GestorServicios.java
+│
 ├── service/
-│ └── PersonaService.java
+│   └── PersonaService.java
+│
 ├── util/
-│ └── ArchivoUtil.java
+│   └── ArchivoUtil.java
+│
 └── ui/
 └── Main.java
-```
+Descripción de las clases
+Paquete model
+Persona
 
----
+Clase abstracta que representa la información común de las personas asociadas a la agencia.
 
-## Descripción de las clases
+Atributos:
 
-### ServicioTuristico
+rut
+nombre
+correo
+Guia
 
-Corresponde a la superclase del sistema y representa la información común de cualquier servicio turístico ofrecido por la agencia.
+Hereda de Persona y representa a los guías turísticos.
 
-**Atributos:**
+Atributo adicional:
 
-* `nombre`
-* `duracionHoras`
+especialidad
+Operador
 
-**Incluye:**
+Hereda de Persona y representa a los operadores turísticos.
 
-* Constructor.
-* Métodos getters y setters.
-* Sobrescritura del método `toString()` para representar la información del objeto.
+Atributo adicional:
 
----
+servicio
+Proveedor
 
-### RutaGastronomica
+Hereda de Persona y representa a los proveedores externos.
 
-Clase que hereda de `ServicioTuristico` y representa las rutas gastronómicas ofrecidas por la agencia.
+Atributo adicional:
 
-**Atributo adicional:**
+rubro
+ServicioTuristico
 
-* `numeroDeParadas`
+Superclase que representa cualquier servicio turístico ofrecido por la agencia.
 
-Sobrescribe el método `toString()` para incluir la información específica de este tipo de servicio.
+Atributos:
 
----
+nombre
+duracionHoras
 
-### PaseoLacustre
+Además de los métodos de acceso y toString(), incorpora el método mostrarInformacion(), el cual sirve como base para aplicar polimorfismo en las subclases.
 
-Clase derivada de `ServicioTuristico` que representa los paseos lacustres.
+RutaGastronomica
 
-**Atributo adicional:**
+Hereda de ServicioTuristico.
 
-* `tipoEmbarcacion`
+Atributo adicional:
 
-Implementa su propia versión del método `toString()` para mostrar las características particulares del servicio.
+numeroDeParadas
 
----
+Sobrescribe el método mostrarInformacion() para mostrar la información específica de una ruta gastronómica.
 
-### ExcursionCultural
+PaseoLacustre
 
-Clase derivada de `ServicioTuristico` destinada a representar excursiones culturales.
+Hereda de ServicioTuristico.
 
-**Atributo adicional:**
+Atributo adicional:
 
-* `lugarHistorico`
+tipoEmbarcacion
 
-Sobrescribe el método `toString()` para complementar la información heredada con los datos propios de la excursión.
+Sobrescribe el método mostrarInformacion() para mostrar la información específica del paseo lacustre.
 
----
+ExcursionCultural
 
-### GestorServicios
+Hereda de ServicioTuristico.
 
-Clase responsable de crear las instancias de prueba utilizadas por la aplicación.
+Atributo adicional:
 
-Actualmente genera:
+lugarHistorico
 
-* Dos objetos de tipo `RutaGastronomica`.
-* Dos objetos de tipo `PaseoLacustre`.
-* Dos objetos de tipo `ExcursionCultural`.
+Sobrescribe el método mostrarInformacion() para mostrar la información específica de una excursión cultural.
 
-Su propósito es centralizar la creación de objetos y facilitar las pruebas del sistema.
+Paquete data
+GestorServicios
 
----
+Clase encargada de administrar los servicios turísticos.
 
-### Main
+Sus principales responsabilidades son:
+
+Crear una colección de tipo List<ServicioTuristico>.
+Agregar objetos de las distintas subclases.
+Recorrer la colección utilizando un bucle for-each.
+Invocar el método mostrarInformacion() aplicando polimorfismo.
+Paquete service
+PersonaService
+
+Clase responsable de la lógica relacionada con la administración de personas.
+
+Permite:
+
+Listar personas.
+Buscar personas por RUT.
+Buscar personas por nombre.
+Paquete util
+ArchivoUtil
+
+Clase utilitaria encargada de la lectura de archivos externos y la validación de los datos cargados al sistema mediante el uso de bloques try-catch.
+
+Paquete ui
+Main
 
 Clase principal de la aplicación.
 
-Desde esta clase se inicia la ejecución del programa, se crea una instancia de `GestorServicios` y se muestran en consola todos los servicios turísticos registrados mediante la utilización del método `toString()` de cada objeto.
+Su función es iniciar la ejecución del sistema, cargar los servicios turísticos mediante GestorServicios y recorrer la colección utilizando polimorfismo para mostrar la información correspondiente a cada servicio.
 
----
+Conceptos aplicados
 
-## Conceptos aplicados
+Durante el desarrollo del proyecto se implementaron los siguientes conceptos:
 
-Durante el desarrollo del proyecto se aplicaron los siguientes conceptos de Programación Orientada a Objetos:
+Programación Orientada a Objetos (POO).
+Encapsulamiento.
+Clases abstractas.
+Herencia simple.
+Polimorfismo.
+Sobrescritura de métodos (@Override).
+Uso del constructor de la superclase mediante super().
+Colecciones genéricas (List y ArrayList).
+Recorrido de colecciones con for-each.
+Lectura de archivos externos.
+Manejo de excepciones mediante try-catch.
+Organización modular mediante paquetes.
+Separación de responsabilidades.
+Reutilización de código.
+Tecnologías utilizadas
+Java
+IntelliJ IDEA
+Git
+GitHub
+Instrucciones de ejecución
+Clonar el repositorio desde GitHub.
+Abrir el proyecto utilizando IntelliJ IDEA.
+Ejecutar la clase Main ubicada en el paquete ui.
+La aplicación mostrará por consola los distintos servicios turísticos almacenados en una colección genérica, aplicando polimorfismo mediante el método mostrarInformacion().
+Autor
 
-* Encapsulamiento.
-* Herencia simple.
-* Reutilización de código.
-* Sobrescritura de métodos (`@Override`).
-* Uso del constructor de la superclase mediante `super()`.
-* Organización modular del proyecto mediante paquetes.
-* Separación de responsabilidades entre las distintas clases.
+Gabriel Urra
 
----
-
-## Tecnologías utilizadas
-
-* Java
-* IntelliJ IDEA
-* Git
-* GitHub
-
----
-
-## Instrucciones de ejecución
-
-1. Clonar el repositorio en el equipo local.
-2. Abrir el proyecto utilizando IntelliJ IDEA.
-3. Ejecutar la clase `Main` ubicada en el paquete `ui`.
-4. El programa mostrará por consola la información correspondiente a los servicios turísticos creados como datos de prueba.
-
----
-
-## Autor
-
-**Gabriel Urra**
-
-Proyecto desarrollado para la asignatura **Desarrollo Orientado a Objetos I**.
+Proyecto desarrollado para la asignatura Desarrollo Orientado a Objetos I.
