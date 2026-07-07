@@ -1,35 +1,60 @@
 package data;
 
-import model.RutaGastronomica;
-import model.PaseoLacustre;
 import model.ExcursionCultural;
+import model.PaseoLacustre;
+import model.RutaGastronomica;
+import model.ServicioTuristico;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestorServicios {
+    private List<ServicioTuristico> servicios;
 
-    public void mostrarServiciosDePrueba() {
-        RutaGastronomica ruta1 = new RutaGastronomica(
-                "Sabores de Puerto Varas", 3, 4);
+    public GestorServicios() {
+        servicios = new ArrayList<>();
+    }
 
-        RutaGastronomica ruta2 = new RutaGastronomica(
-                "Ruta del Kuchen y Café", 2, 3);
+    public void cargarServicios() {
+        servicios.add(new RutaGastronomica(
+                "Sabores de Puerto Varas",
+                3,
+                4));
 
-        PaseoLacustre paseo1 = new PaseoLacustre(
-                "Navegación Lago Llanquihue", 2, "Lancha turística");
+        servicios.add(new RutaGastronomica(
+                "Ruta del Kuchen y Café",
+                2,
+                3));
 
-        PaseoLacustre paseo2 = new PaseoLacustre(
-                "Atardecer en el Lago", 1, "Catamarán");
+        servicios.add(new PaseoLacustre(
+                "Navegación Lago Llanquihue",
+                2,
+                "Lancha turística"));
 
-        ExcursionCultural excursion1 = new ExcursionCultural(
-                "Historia de Frutillar", 4, "Teatro del Lago");
+        servicios.add(new PaseoLacustre(
+                "Atardecer en el Lago",
+                1,
+                "Catamarán"));
 
-        ExcursionCultural excursion2 = new ExcursionCultural(
-                "Patrimonio de Puerto Octay", 3, "Casa Niklitschek");
+        servicios.add(new ExcursionCultural(
+                "Historia de Frutillar",
+                4,
+                "Teatro del Lago"));
 
-        System.out.println(ruta1);
-        System.out.println(ruta2);
-        System.out.println(paseo1);
-        System.out.println(paseo2);
-        System.out.println(excursion1);
-        System.out.println(excursion2);
+        servicios.add(new ExcursionCultural(
+                "Patrimonio de Puerto Octay",
+                3,
+                "Casa Niklitschek"));
+    }
+
+    public List<ServicioTuristico> obtenerServicios() {
+        return servicios;
+    }
+
+    public void mostrarServicios() {
+        for (ServicioTuristico servicio : servicios) {
+            servicio.mostrarInformacion();
+            System.out.println();
+        }
     }
 }

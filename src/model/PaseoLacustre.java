@@ -17,6 +17,12 @@ public class PaseoLacustre extends ServicioTuristico {
     }
 
     @Override
+    public void mostrarInformacion() {
+        System.out.println("=== Paseo Lacustre ===");
+        System.out.println(this);
+    }
+
+    @Override
     public String toString() {
         return "[Paseo Lacustre] " + super.toString() +
                 " | Tipo de embarcación: " + tipoEmbarcacion;

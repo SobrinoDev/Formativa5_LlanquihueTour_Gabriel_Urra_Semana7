@@ -9,6 +9,8 @@ public class Main {
         System.out.println("Servicios turísticos disponibles:\n");
 
         GestorServicios gestorServicios = new GestorServicios();
-        gestorServicios.mostrarServiciosDePrueba();
+
+        gestorServicios.cargarServicios();
+        gestorServicios.mostrarServicios();
     }
 }
