@@ -2,29 +2,32 @@
 
 ## Desarrollo Orientado a Objetos I
 
-## Descripción del proyecto
+---
 
-**LlanquihueTourApp** es una aplicación de consola desarrollada en **Java** para la asignatura **Desarrollo Orientado a Objetos I**.
+# Descripción del proyecto
 
-El proyecto tiene como finalidad representar un sistema básico para la gestión de la agencia de turismo **Llanquihue Tour**, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
+**LlanquihueTourApp** es una aplicación desarrollada en **Java** como parte de la asignatura **Desarrollo Orientado a Objetos I**.
 
-Durante las distintas etapas del desarrollo se han implementado funcionalidades para la administración de personas vinculadas a la agencia (guías, operadores y proveedores), así como la representación de los distintos servicios turísticos mediante una jerarquía de clases. Además, se incorporó el uso de **polimorfismo** y **colecciones genéricas**, permitiendo gestionar diferentes tipos de servicios turísticos desde una única colección y recorrerlos dinámicamente.
+El proyecto representa un sistema de gestión para la agencia de turismo **Llanquihue Tour**, permitiendo administrar distintas entidades relacionadas con su operación, como guías turísticos, operadores, proveedores, colaboradores externos, vehículos y servicios turísticos.
+
+Durante el desarrollo del proyecto se han aplicado los principales conceptos de Programación Orientada a Objetos, incorporando encapsulamiento, herencia, polimorfismo, interfaces, colecciones genéricas, lectura y escritura de archivos, además de una interfaz gráfica básica mediante **JOptionPane**.
 
 ---
 
 # Objetivos
 
-El proyecto tiene como objetivos:
+El proyecto tiene como finalidad:
 
 - Organizar el código utilizando una estructura modular basada en paquetes.
-- Aplicar el principio de encapsulamiento mediante atributos privados.
-- Implementar constructores, métodos **getters**, **setters** y el método **toString()**.
+- Aplicar encapsulamiento mediante atributos privados.
+- Implementar constructores, getters, setters y el método `toString()`.
 - Modelar relaciones de herencia entre clases.
-- Aplicar polimorfismo mediante referencias a la superclase.
-- Gestionar objetos utilizando colecciones genéricas (`List` y `ArrayList`).
-- Reutilizar código mediante superclases.
-- Leer y validar información desde archivos externos.
-- Mostrar información mediante una aplicación de consola.
+- Aplicar polimorfismo mediante interfaces y sobrescritura de métodos.
+- Gestionar objetos utilizando colecciones genéricas (`ArrayList`).
+- Validar tipos de objetos utilizando `instanceof`.
+- Leer y almacenar información utilizando archivos CSV.
+- Implementar una interfaz gráfica básica mediante `JOptionPane`.
+- Favorecer la reutilización y mantenibilidad del código.
 
 ---
 
@@ -34,17 +37,21 @@ El proyecto tiene como objetivos:
 src/
 │
 ├── model/
+│   ├── Registrable.java
 │   ├── Persona.java
 │   ├── Guia.java
 │   ├── Operador.java
 │   ├── Proveedor.java
+│   ├── Vehiculo.java
+│   ├── ColaboradorExterno.java
 │   ├── ServicioTuristico.java
 │   ├── RutaGastronomica.java
 │   ├── PaseoLacustre.java
 │   └── ExcursionCultural.java
 │
 ├── data/
-│   └── GestorServicios.java
+│   ├── GestorServicios.java
+│   └── GestorEntidades.java
 │
 ├── service/
 │   └── PersonaService.java
@@ -54,7 +61,22 @@ src/
 │
 └── ui/
     └── Main.java
+
+resources/
+└── personas.csv
 ```
+
+---
+
+# Arquitectura del sistema
+
+| Paquete | Descripción |
+|----------|-------------|
+| **model** | Contiene las clases del modelo y la interfaz `Registrable`. |
+| **data** | Gestiona las colecciones de entidades y servicios turísticos. |
+| **service** | Contiene la lógica de negocio asociada a las personas. |
+| **util** | Gestiona la lectura y escritura de archivos CSV. |
+| **ui** | Contiene la interfaz gráfica y el punto de inicio de la aplicación. |
 
 ---
 
@@ -62,9 +84,19 @@ src/
 
 ## Paquete `model`
 
+### Registrable
+
+Interfaz que define el comportamiento común de todas las entidades administradas por el sistema mediante el método:
+
+```java
+mostrarResumen();
+```
+
+---
+
 ### Persona
 
-Clase abstracta que representa la información común de las personas asociadas a la agencia.
+Clase abstracta que representa la información común de las personas registradas en la agencia.
 
 **Atributos:**
 
@@ -72,27 +104,32 @@ Clase abstracta que representa la información común de las personas asociadas 
 - nombre
 - correo
 
-Implementa:
+Es la superclase de:
 
-- Constructor.
-- Métodos getters y setters.
-- Método `toString()`.
+- Guia
+- Operador
+- Proveedor
+- ColaboradorExterno
+
+Implementa la interfaz `Registrable`.
 
 ---
 
 ### Guia
 
-Hereda de la clase `Persona` y representa a los guías turísticos.
+Representa a un guía turístico.
 
 **Atributo adicional:**
 
 - especialidad
 
+Implementa el método `mostrarResumen()`.
+
 ---
 
 ### Operador
 
-Hereda de la clase `Persona` y representa a los operadores turísticos.
+Representa a un operador turístico.
 
 **Atributo adicional:**
 
@@ -102,7 +139,7 @@ Hereda de la clase `Persona` y representa a los operadores turísticos.
 
 ### Proveedor
 
-Hereda de la clase `Persona` y representa a los proveedores externos.
+Representa a un proveedor de servicios.
 
 **Atributo adicional:**
 
@@ -110,131 +147,148 @@ Hereda de la clase `Persona` y representa a los proveedores externos.
 
 ---
 
+### ColaboradorExterno
+
+Representa a un colaborador externo de la agencia.
+
+**Atributos adicionales:**
+
+- empresa
+- funcion
+
+---
+
+### Vehiculo
+
+Representa un vehículo utilizado por la agencia.
+
+**Atributos:**
+
+- patente
+- marca
+- modelo
+- capacidadPasajeros
+
+Implementa la interfaz `Registrable`.
+
+---
+
 ### ServicioTuristico
 
-Superclase que representa cualquier servicio turístico ofrecido por la agencia.
+Clase base para representar los distintos servicios turísticos ofrecidos por la agencia.
 
 **Atributos:**
 
 - nombre
 - duracionHoras
 
-Implementa:
+Incluye el método `mostrarInformacion()`, sobrescrito por sus subclases.
 
-- Constructor.
-- Getters y setters.
-- Método `toString()`.
-- Método `mostrarInformacion()`, utilizado como base para aplicar polimorfismo.
+Subclases:
 
----
-
-### RutaGastronomica
-
-Hereda de `ServicioTuristico`.
-
-**Atributo adicional:**
-
-- numeroDeParadas
-
-Sobrescribe el método `mostrarInformacion()` para mostrar la información específica de una ruta gastronómica.
+- RutaGastronomica
+- PaseoLacustre
+- ExcursionCultural
 
 ---
 
-### PaseoLacustre
-
-Hereda de `ServicioTuristico`.
-
-**Atributo adicional:**
-
-- tipoEmbarcacion
-
-Sobrescribe el método `mostrarInformacion()` para mostrar la información específica del paseo lacustre.
-
----
-
-### ExcursionCultural
-
-Hereda de `ServicioTuristico`.
-
-**Atributo adicional:**
-
-- lugarHistorico
-
-Sobrescribe el método `mostrarInformacion()` para mostrar la información específica de una excursión cultural.
-
----
-
-## Paquete `data`
+# Paquete `data`
 
 ### GestorServicios
 
-Clase encargada de administrar los servicios turísticos.
-
-Sus principales responsabilidades son:
-
-- Crear una colección de tipo `List<ServicioTuristico>`.
-- Agregar objetos de las distintas subclases.
-- Recorrer la colección utilizando un bucle `for-each`.
-- Invocar el método `mostrarInformacion()` aplicando polimorfismo.
-
----
-
-## Paquete `service`
-
-### PersonaService
-
-Clase responsable de la lógica relacionada con la administración de personas.
+Administra los servicios turísticos utilizando una colección polimórfica.
 
 Permite:
 
-- Listar personas.
-- Buscar personas por RUT.
-- Buscar personas por nombre.
+- Registrar servicios.
+- Recorrer la colección.
+- Mostrar la información de cada servicio.
 
 ---
 
-## Paquete `util`
+### GestorEntidades
+
+Administra todas las entidades registrables del sistema.
+
+Implementa:
+
+- Colección `ArrayList<Registrable>`.
+- Registro de entidades.
+- Recorrido mediante polimorfismo.
+- Validación utilizando `instanceof`.
+- Obtención del resumen de todas las entidades registradas.
+
+---
+
+# Paquete `service`
+
+### PersonaService
+
+Contiene la lógica relacionada con las personas registradas en la agencia.
+
+Permite:
+
+- Buscar personas por RUT.
+- Buscar personas por nombre.
+- Mostrar personas registradas.
+
+---
+
+# Paquete `util`
 
 ### ArchivoUtil
 
-Clase utilitaria encargada de la lectura de archivos externos y la validación de los datos cargados al sistema mediante el uso de bloques `try-catch`.
+Clase encargada de la persistencia de datos.
+
+Permite:
+
+- Leer entidades desde el archivo `personas.csv`.
+- Crear automáticamente los objetos correspondientes.
+- Guardar nuevas entidades en el archivo CSV.
+- Validar registros y controlar errores mediante `try-catch`.
 
 ---
 
-## Paquete `ui`
+# Paquete `ui`
 
 ### Main
 
-Clase principal de la aplicación.
+Clase principal del sistema.
 
-Su función es iniciar la ejecución del sistema, cargar los servicios turísticos mediante `GestorServicios` y recorrer la colección utilizando polimorfismo para mostrar la información correspondiente a cada servicio.
+Implementa una interfaz gráfica mediante `JOptionPane`, permitiendo:
+
+- Registrar guías turísticos.
+- Registrar vehículos.
+- Registrar colaboradores externos.
+- Visualizar todas las entidades registradas.
+- Cargar automáticamente la información almacenada en el archivo `personas.csv`.
 
 ---
 
-# Conceptos aplicados
+# Funcionalidades implementadas
 
-Durante el desarrollo del proyecto se implementaron los siguientes conceptos de Programación Orientada a Objetos:
-
-- Programación Orientada a Objetos (POO).
+- Organización modular mediante paquetes.
 - Encapsulamiento.
 - Clases abstractas.
+- Interfaces.
 - Herencia simple.
 - Polimorfismo.
 - Sobrescritura de métodos (`@Override`).
-- Uso del constructor de la superclase mediante `super()`.
-- Colecciones genéricas (`List` y `ArrayList`).
-- Recorrido de colecciones mediante `for-each`.
-- Lectura de archivos externos.
+- Uso del constructor de la superclase (`super()`).
+- Uso de `instanceof`.
+- Colecciones genéricas (`ArrayList`).
+- Lectura de archivos CSV.
+- Escritura de archivos CSV.
+- Persistencia de datos.
 - Manejo de excepciones mediante `try-catch`.
-- Organización modular mediante paquetes.
-- Separación de responsabilidades.
-- Reutilización de código.
+- Interfaz gráfica utilizando `JOptionPane`.
 
 ---
 
 # Tecnologías utilizadas
 
 - Java
+- Swing (`JOptionPane`)
 - IntelliJ IDEA
 - Git
 - GitHub
@@ -245,8 +299,10 @@ Durante el desarrollo del proyecto se implementaron los siguientes conceptos de 
 
 1. Clonar el repositorio desde GitHub.
 2. Abrir el proyecto utilizando IntelliJ IDEA.
-3. Ejecutar la clase `Main` ubicada en el paquete `ui`.
-4. La aplicación mostrará por consola los distintos servicios turísticos almacenados en una colección genérica, aplicando polimorfismo mediante el método `mostrarInformacion()`.
+3. Verificar que el archivo `resources/personas.csv` exista dentro del proyecto.
+4. Ejecutar la clase `Main` ubicada en el paquete `ui`.
+5. Utilizar el menú gráfico para registrar nuevas entidades o visualizar los registros existentes.
+6. Cada nuevo registro será almacenado automáticamente en el archivo `personas.csv`.
 
 ---
 
@@ -254,4 +310,4 @@ Durante el desarrollo del proyecto se implementaron los siguientes conceptos de 
 
 **Gabriel Urra**
 
-Proyecto desarrollado para la asignatura **Desarrollo Orientado a Objetos I**.
+Proyecto desarrollado para la asignatura **Desarrollo Orientado a Objetos**.
