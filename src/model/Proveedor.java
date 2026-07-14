@@ -17,8 +17,17 @@ public class Proveedor extends Persona {
     }
 
     @Override
+    public String mostrarResumen() {
+        return "=== PROVEEDOR ===\n"
+                + "RUT: " + getRut() + "\n"
+                + "Nombre: " + getNombre() + "\n"
+                + "Correo: " + getCorreo() + "\n"
+                + "Rubro: " + rubro;
+    }
+
+    @Override
     public String toString() {
-        return "[Proveedor] " + super.toString() +
-                " | Rubro: " + rubro;
+        return "[Proveedor] " + super.toString()
+                + " | Rubro: " + rubro;
     }
 }

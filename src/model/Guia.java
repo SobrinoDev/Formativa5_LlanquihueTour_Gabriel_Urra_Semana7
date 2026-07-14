@@ -17,8 +17,17 @@ public class Guia extends Persona {
     }
 
     @Override
+    public String mostrarResumen() {
+        return "=== GUÍA TURÍSTICO ===\n"
+                + "RUT: " + getRut() + "\n"
+                + "Nombre: " + getNombre() + "\n"
+                + "Correo: " + getCorreo() + "\n"
+                + "Especialidad: " + especialidad;
+    }
+
+    @Override
     public String toString() {
-        return "[Guía] " + super.toString() +
-                " | Especialidad: " + especialidad;
+        return "[Guía] " + super.toString()
+                + " | Especialidad: " + especialidad;
     }
 }

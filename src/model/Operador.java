@@ -17,8 +17,17 @@ public class Operador extends Persona {
     }
 
     @Override
+    public String mostrarResumen() {
+        return "=== OPERADOR TURÍSTICO ===\n"
+                + "RUT: " + getRut() + "\n"
+                + "Nombre: " + getNombre() + "\n"
+                + "Correo: " + getCorreo() + "\n"
+                + "Servicio: " + servicio;
+    }
+
+    @Override
     public String toString() {
-        return "[Operador] " + super.toString() +
-                " | Servicio: " + servicio;
+        return "[Operador] " + super.toString()
+                + " | Servicio: " + servicio;
     }
 }

@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Persona {
+public abstract class Persona implements Registrable {
     private String rut;
     private String nombre;
     private String correo;
@@ -37,8 +37,11 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return "RUT: " + rut +
-                " | Nombre: " + nombre +
-                " | Correo: " + correo;
+        return "RUT: " + rut
+                + " | Nombre: " + nombre
+                + " | Correo: " + correo;
     }
+
+    @Override
+    public abstract String mostrarResumen();
 }
